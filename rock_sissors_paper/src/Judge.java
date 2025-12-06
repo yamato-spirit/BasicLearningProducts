@@ -1,20 +1,14 @@
 public class Judge {
-    public String judging(int user, int com) {
-        int judgeNum = (user - com + 3) % 3;
-        String result;
+    // Hand同士を受け取り、Resultを返す
+    public Result judging(Hand user, Hand com) {
+        // Enumの中に持たせた id を使って計算
+        int judgeNum = (user.getId() - com.getId() + 3) % 3;
+
+        // 数字ではなく Enum を返す
         switch (judgeNum) {
-            case 1 -> {
-                result = "負け";
-                break;
-            }
-            case 2 -> {
-                result = "勝ち";
-                break;
-            }
-            default -> {
-                result = "あいこ";
-            }
+            case 2 -> { return Result.WIN; }
+            case 1 -> { return Result.LOSE; }
+            default -> { return Result.DRAW; }
         }
-        return result;
     }
 }

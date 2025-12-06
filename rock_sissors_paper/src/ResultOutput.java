@@ -1,42 +1,21 @@
 public class ResultOutput {
-    public static void resultView(int user, int com, String result) {
+    // 引数がすべて Enum になったことで非常にスッキリ！
+    public static void resultView(Hand user, Hand com, Result result) {
         System.out.println("～結果発表～");
-        System.out.println("あなたは" + handChecker(user) + "を出しました");
-        System.out.println("COMは" + handChecker(com) + "を出しました");
-        resultChecker(result); // じゃんけんの結果を出力(勝ち・負け・あいこ)
+        
+        // .getDisplayName() を呼ぶだけでOK
+        System.out.println("あなたは" + user.getDisplayName() + "を出しました");
+        System.out.println("COMは" + com.getDisplayName() + "を出しました");
+        
+        resultChecker(result);
     }
-    public static String handChecker(int handNum) {
-        String hand;
-        switch(handNum) {
-            case 1 -> {
-                hand = "グー";
-                break;
-            }
-            case 2 -> {
-                hand = "チョキ";
-                break;
-            }
-            default -> {
-                hand = "パー";
-                break;
-            }
-        }
-        return hand;
-    }
-    public static void resultChecker(String result) {
-    switch(result) {
-        case "勝ち" -> {
-            System.out.println("おめでとう！！あなたの勝ちです");
-            break;
-        }
-        case "負け" -> {
-            System.out.println("残念！あなたの負けです");
-            break;
-        }
-        default -> {
-            System.out.println("あいこです。もう一回！");
-            break;
+
+    public static void resultChecker(Result result) {
+        // 文字列比較ではなく Enum の分岐なので安全
+        switch(result) {
+            case WIN -> System.out.println("おめでとう！！あなたの勝ちです");
+            case LOSE -> System.out.println("残念！あなたの負けです");
+            case DRAW -> System.out.println("あいこです。もう一回！");
         }
     }
-}
 }
